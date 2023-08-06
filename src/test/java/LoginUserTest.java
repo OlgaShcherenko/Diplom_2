@@ -1,11 +1,7 @@
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.Matchers;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import ru.praktikum.diplom_2.clients.UserClient;
 import ru.praktikum.diplom_2.dataprovider.UserProvider;
@@ -15,11 +11,6 @@ import ru.praktikum.diplom_2.pojo.LoginUserRequest;
 public class LoginUserTest {
     private UserClient userClient = new UserClient();
     private String accessToken;
-
-    @Before
-    public void setUp() {
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
-    }
 
     @Test
     @DisplayName("Successful authorization under existing user")

@@ -6,11 +6,11 @@ import ru.praktikum.diplom_2.pojo.CreateOrderRequest;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderClient extends BaseClient{
+public class OrderClient extends BaseClient {
     public static final String ORDER_PATH = "/api/orders";
 
-    @Step ("Request to create order")
-    public ValidatableResponse createOrder (String accessToken, CreateOrderRequest createOrderRequest){
+    @Step("Request to create order")
+    public ValidatableResponse createOrder(String accessToken, CreateOrderRequest createOrderRequest) {
         return given()
                 .spec(getSpec())
                 .header("Authorization", accessToken)
@@ -20,8 +20,8 @@ public class OrderClient extends BaseClient{
                 .then();
     }
 
-    @Step ("Get orders from specific user")
-    public ValidatableResponse getUsersOrders (String accessToken){
+    @Step("Get orders from specific user")
+    public ValidatableResponse getUsersOrders(String accessToken) {
         return given()
                 .spec(getSpec())
                 .header("Authorization", accessToken)

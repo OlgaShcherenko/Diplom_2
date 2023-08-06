@@ -1,7 +1,4 @@
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +15,6 @@ public class ChangeUserDataTest {
     @Before
     @DisplayName("Create user")
     public void setUp() {
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         CreateUserRequest createUserRequest = UserProvider.getRandomCreateUserRequest();
         accessToken = userClient.createUser(createUserRequest)
                 .extract().jsonPath().get("accessToken");

@@ -10,7 +10,7 @@ public class BaseClient {
 
     protected RequestSpecification getSpec() {
         return new RequestSpecBuilder()
-                //.log(LogDetail.ALL)
+                .log(LogDetail.ALL)
                 .setContentType(ContentType.JSON)
                 .setBaseUri(BASE_URL)
                 .build();
