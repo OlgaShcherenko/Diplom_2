@@ -8,6 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class OrderClient extends BaseClient {
     public static final String ORDER_PATH = "/api/orders";
+    public static final String INGREDIENTS_PATH = "api/ingredients";
 
     @Step("Request to create order")
     public ValidatableResponse createOrder(String accessToken, CreateOrderRequest createOrderRequest) {
@@ -27,6 +28,15 @@ public class OrderClient extends BaseClient {
                 .header("Authorization", accessToken)
                 .when()
                 .get(ORDER_PATH)
+                .then();
+    }
+
+    @Step("Get ingredients")
+    public ValidatableResponse getIngredients() {
+        return given()
+                .spec(getSpec())
+                .when()
+                .get(INGREDIENTS_PATH)
                 .then();
     }
 }

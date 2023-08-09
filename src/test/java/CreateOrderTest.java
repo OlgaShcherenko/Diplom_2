@@ -16,11 +16,7 @@ public class CreateOrderTest {
     private OrderClient orderClient = new OrderClient();
     private UserClient userClient = new UserClient();
     private String accessToken;
-    private List<String> validIngredients = Arrays.asList(
-            "61c0c5a71d1f82001bdaaa6d",
-            "61c0c5a71d1f82001bdaaa71",
-            "61c0c5a71d1f82001bdaaa6e",
-            "61c0c5a71d1f82001bdaaa6c");
+    private List<String> validIngredients;
 
     private List<String> invalidIngredients = Arrays.asList(
             "123456789",
@@ -38,6 +34,8 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Create order without authorization")
     public void createOrderWithoutAuthorized() {
+        validIngredients = orderClient.getIngredients()
+                .extract().jsonPath().get("data._id");
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(validIngredients);
         orderClient.createOrder("", createOrderRequest)
                 .statusCode(200)
@@ -49,6 +47,8 @@ public class CreateOrderTest {
     @Test
     @DisplayName("Create order with authorization and valid ingredients")
     public void createOrderWithAuthorizedAndValidIngredients() {
+        validIngredients = orderClient.getIngredients()
+                .extract().jsonPath().get("data._id");
         CreateOrderRequest createOrderRequest = new CreateOrderRequest(validIngredients);
         orderClient.createOrder(accessToken, createOrderRequest)
                 .statusCode(200)
